@@ -51,7 +51,7 @@ public class RoleService extends BaseService<Role> {
                 return true;
             }else {
                 //说明需要添加新的菜单权限
-                List<RoleMenu> list = new ArrayList<>();
+                List<RoleMenu> list = new ArrayList<RoleMenu>();
                 //遍历菜单权限
                 for (Long menuId : roleVo.getMenuId()){
                     RoleMenu roleMenu = new RoleMenu();
@@ -140,7 +140,7 @@ public class RoleService extends BaseService<Role> {
                             return true;
                         }else {
                             //说明要设置新的权限
-                            List<RoleMenu> menuList = new ArrayList<>();
+                            List<RoleMenu> menuList = new ArrayList<RoleMenu>();
                             for (Long menuLists : roleVo.getMenuId()){
                                 RoleMenu roleMenu = new RoleMenu();
                                 roleMenu.setMenuId(menuLists).setRoleId(roleVo.getRole().getRoleId());
