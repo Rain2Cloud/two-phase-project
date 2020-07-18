@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author yay
- * @Description TODO
+ * @Description ApplicationRun8082
  * @CreatTime 2020年 07月17日 星期五 09:29:56
  */
 @SpringBootApplication

@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -83,4 +84,5 @@ public class Menu implements Serializable {
     @Column(name = "MODIFY_TIME")
     private Date modifyTime;
 
+    private List<Menu> subMenu;
 }
