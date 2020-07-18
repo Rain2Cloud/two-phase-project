@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author yay
- * @Description TODO
+ * @Description LoginLogController
  * @CreatTime 2020年 07月15日 星期三 21:42:44
  */
 @RestController

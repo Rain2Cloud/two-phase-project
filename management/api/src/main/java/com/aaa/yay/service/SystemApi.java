@@ -2,9 +2,11 @@ package com.aaa.yay.service;
 
 import com.aaa.yay.base.ResultData;
 import com.aaa.yay.model.LoginLog;
+import com.aaa.yay.model.Menu;
 import com.aaa.yay.model.User;
 import com.aaa.yay.vo.RoleVo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +46,7 @@ public interface SystemApi {
 
 
 
-
+    //--------------------------Role-----------------------------
     /**
     * 新增角色
     * @author yay
@@ -88,4 +90,63 @@ public interface SystemApi {
     */
     @PostMapping("/role/selectAll")
     ResultData selectAllRoles(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+
+
+
+    //------------------------------Menu------------------------------
+    /**
+    * 增加菜单
+    * @author yay
+    * @param menu
+    * @updateTime 2020/07/18 14:25
+    * @throws
+    * @return com.aaa.yay.base.ResultData
+    */
+    @PostMapping("/menu/addMenu")
+    ResultData addMenu(@RequestBody Menu menu);
+
+    /**
+    * 根据主键删除菜单
+    * @author yay
+    * @param menu
+    * @updateTime 2020/07/18 14:28
+    * @throws
+    * @return com.aaa.yay.base.ResultData
+    */
+    @PostMapping("/menu/delMenu")
+    ResultData delMenu(@RequestBody Menu menu);
+
+    /**
+    * 根据主键批量删除菜单
+    * @author yay
+    * @param ids
+    * @updateTime 2020/07/18 14:28
+    * @throws
+    * @return com.aaa.yay.base.ResultData
+    */
+    @PostMapping("/menu/batchDelete")
+    ResultData batchDelete(@RequestParam("ids") Integer[] ids);
+
+    /**
+    * 根据主键修改属性不为空的菜单
+    * @author yay
+    * @param menu
+    * @updateTime 2020/07/18 14:29
+    * @throws
+    * @return com.aaa.yay.base.ResultData
+    */
+    @PostMapping("/menu/updateMenu")
+    ResultData updateMenu(@RequestBody Menu menu);
+
+    /**
+    * 查询所有菜单
+    * @author yay
+    * @param
+    * @updateTime 2020/07/18 14:29
+    * @throws
+    * @return com.aaa.yay.base.ResultData
+    */
+    @GetMapping("/menu/getMenus")
+    ResultData selectAllMenus();
 }

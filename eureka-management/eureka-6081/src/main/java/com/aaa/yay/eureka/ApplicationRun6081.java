@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @Author yay
- * @Description TODO
+ * @Description ApplicationRun6081
  * @CreatTime 2020年 07月15日 星期三 22:08:45
  */
 @SpringBootApplication
