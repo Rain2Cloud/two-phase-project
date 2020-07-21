@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>consumer-7081</module>
+        <module>consumer-7082</module>
     </modules>
     <artifactId>consumer-management</artifactId>
 

@@ -30,16 +30,14 @@ public class MenuService extends BaseService<Menu> {
         List<Menu> allMenuList = getMapper().selectAll();
         // 判断得到的菜单信息是否为空
         if (null != allMenuList && 0 < allMenuList.size()){
-            for (Menu menu:
-                 allMenuList) {
+            for (Menu menu: allMenuList) {
                 if (menu.getParentId() == 0){
                     // 说明是一级菜单
                     menuList.add(menu);
                 }
             }
             //获取一级菜单的子菜单
-            for (Menu menu:
-                 menuList) {
+            for (Menu menu: menuList) {
                 menu.setSubMenu(getSubMenu(menu.getMenuId(),allMenuList));
             }
         }

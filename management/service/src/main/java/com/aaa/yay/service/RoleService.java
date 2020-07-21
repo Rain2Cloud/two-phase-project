@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aaa.yay.staticproperties.TimeFormatProperties.TIME_FORMAT;
+
 /**
  * @Author yay
  * @Description RoleService
@@ -36,8 +38,8 @@ public class RoleService extends BaseService<Role> {
     public Boolean addRole(RoleVo roleVo){
 
         //获取新增时间
-        DateTime CreateTime = DateUtil.parse(DateUtil.now());
-        roleVo.getRole().setCreateTime(CreateTime);
+        DateTime createTime = DateUtil.parse(DateUtil.now(),TIME_FORMAT);
+        roleVo.getRole().setCreateTime(createTime);
 
         // 执行新增
         int insertRole = getMapper().insert(roleVo.getRole());

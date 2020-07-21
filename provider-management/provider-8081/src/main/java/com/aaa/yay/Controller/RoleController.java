@@ -80,6 +80,6 @@ public class RoleController extends CommonController<Role> {
     @PostMapping("/selectAll")
     public ResultData selectAllRoles(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
         List<Role> roleList = getBaseService().selectByFileds(pageNo, pageSize, null, null, null, (String[]) null);
-        return roleList.size() > 0 ? operationSuccess("查询成功") : operationFailed("查询失败");
+        return roleList.size() > 0 ? operationSuccess(roleList,"查询成功") : operationFailed("查询失败");
     }
 }
