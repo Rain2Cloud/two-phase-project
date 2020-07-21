@@ -39,7 +39,7 @@ public class RoleController {
     * @throws
     * @return com.aaa.yay.base.ResultData
     */
-    @PostMapping("delRole")
+    @PostMapping("/delRole")
     public ResultData deleteRole(@RequestParam("roleId") Long roleId){
         return systemApi.deleteRole(roleId);
     }

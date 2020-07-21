@@ -1,5 +1,8 @@
 package com.aaa.yay.base;
 
+import com.aaa.yay.mapper.UserMapper;
+import com.aaa.yay.model.User;
+import com.aaa.yay.utils.BaseUtil;
 import com.aaa.yay.utils.Map2BeanUtils;
 import com.aaa.yay.utils.SpringContextUtils;
 import com.github.pagehelper.PageHelper;
@@ -12,6 +15,7 @@ import tk.mybatis.mapper.util.Sqls;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +42,14 @@ public abstract class BaseService<T> {
     @Autowired
     private Mapper<T> mapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     protected Mapper<T> getMapper() {
         return mapper;
+    }
+    protected Mapper<User> getUserMapper() {
+        return userMapper;
     }
 
     /**
@@ -273,4 +283,27 @@ public abstract class BaseService<T> {
     public ApplicationContext getApplicationContext() {
         return SpringContextUtils.getApplicationContext();
     }
+
+
+
+        /**
+        * @Auther: czb
+        * @Description:
+         * 多表分页查询所有用户
+        * @Date: 2020/7/20 20:47
+        * @param [map]
+        * @return com.github.pagehelper.PageInfo<java.util.HashMap>
+        */
+    public PageInfo<HashMap> selectUserPageInfo(HashMap map){
+        PageHelper.startPage(BaseUtil.transToInt(map.get("pageNo")), BaseUtil.transToInt(map.get("pageSize")));
+        List<HashMap> list = userMapper.selectUserAll(map);
+        PageInfo<HashMap> pageInfo = new PageInfo<HashMap>(list);
+        if (null != pageInfo && !"".equals(pageInfo)){
+            return pageInfo;
+        }
+        return null;
+    }
+
+
+
 }

@@ -243,4 +243,6 @@ public abstract class CommonController<T> extends BaseController {
     public HttpSession getExistSession() {
         return getServletRequest().getSession(false);
     }
+
+
 }

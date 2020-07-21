@@ -7,6 +7,7 @@ import com.aaa.yay.service.SystemApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -64,30 +65,45 @@ public class UserController extends BaseController {
     }
 
 
+//
+//    /**
+//     * @Description: 查询全部用户
+//     * @Author: czb
+//     * @Date: 2020/7/17 22:54
+//     * @Param:
+//     * @return: com.aaa.qy108.base.ResultData
+//     */
+//    @PostMapping("selectAll")
+//    public ResultData selectAll(User user){
+//        return systemApi.selectAll(user);
+//    }
 
-    /**
-     * @Description: 查询全部用户
-     * @Author: czb
-     * @Date: 2020/7/17 22:54
-     * @Param:
-     * @return: com.aaa.qy108.base.ResultData
-     */
-    @PostMapping("selectAll")
-    public ResultData selectAll(User user){
-        return systemApi.selectAll(user);
-    }
+//
+//        /**
+//        * @Auther: czb
+//        * @Description:
+//         * 查询全部用户(分页)
+//        * @Date: 2020/7/17 14:49
+//        * @param [pageNo, pageSize]
+//        * @return com.aaa.yay.base.ResultData
+//        */
+//    @PostMapping("/selectAllUserPage")
+//    public ResultData selectAllUserPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+//        return systemApi.selectAllUserPage(pageNo, pageSize);
+//    }
 
 
         /**
         * @Auther: czb
         * @Description:
-         * 查询全部用户(分页)
-        * @Date: 2020/7/17 14:49
-        * @param [pageNo, pageSize]
+         *带条件查询用户
+        * @Date: 2020/7/20 20:58
+        * @param [map]
         * @return com.aaa.yay.base.ResultData
         */
-    @PostMapping("/selectAllUserPage")
-    public ResultData selectAllUserPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-        return systemApi.selectAllUserPage(pageNo, pageSize);
+    @PostMapping("/selectUserAll")
+    ResultData selectUserAll(@RequestBody HashMap map){
+        return systemApi.selectUserAll(map);
     }
+
 }

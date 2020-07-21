@@ -31,7 +31,7 @@ public class CompareListUtils {
             return false;
         }
 
-        Set<Integer> hashCodeSet = new HashSet<>();
+        Set<Integer> hashCodeSet = new HashSet<Integer>();
         for (T adInfoData : list1){
             hashCodeSet.add(adInfoData.hashCode());
         }

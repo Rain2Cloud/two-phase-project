@@ -1,15 +1,25 @@
 package com.aaa.yay.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.io.Serializable;
 
+
+/**
+ * @author 十八
+ */
 @Table(name = "t_dept")
 @Data
-public class Dept {
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
+public class Dept implements Serializable {
     /**
      * 部门ID
      */

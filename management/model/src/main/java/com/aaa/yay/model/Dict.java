@@ -8,13 +8,17 @@ import lombok.experimental.Accessors;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
+/**
+ * @author 十八
+ */
 @Table(name = "t_dict")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
-public class Dict {
+public class Dict implements Serializable {
     /**
      * 字典ID
      */

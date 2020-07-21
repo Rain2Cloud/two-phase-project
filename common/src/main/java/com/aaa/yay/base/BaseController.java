@@ -244,6 +244,21 @@ public class BaseController {
         return resultData;
     }
 
+
+    /**
+     * @Description: 超时退出
+     * @Author: czb
+     * @Date: 2020/7/18 16:00
+     * @Param: []
+     * @return: com.aaa.qy108.base.ResultData
+     */
+    protected ResultData loginTimeoutExit() {
+        ResultData resultData = new ResultData();
+        resultData.setCode(LOGIN_TIMEOUT_EXIT.getCode());
+        resultData.setMsg(LOGIN_TIMEOUT_EXIT.getMsg());
+        return resultData;
+    }
+
     /**
      * 新增操作，返回系统消息
      *

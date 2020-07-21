@@ -25,7 +25,7 @@ public class MenuService extends BaseService<Menu> {
     */
     public List<Menu> selectAllMenus(){
         // 菜单树
-        List<Menu> menuList = new ArrayList<>();
+        List<Menu> menuList = new ArrayList<Menu>();
         // 全部菜单信息
         List<Menu> allMenuList = getMapper().selectAll();
         // 判断得到的菜单信息是否为空
@@ -57,7 +57,7 @@ public class MenuService extends BaseService<Menu> {
     private List<Menu> getSubMenu(Long menuId, @org.jetbrains.annotations.NotNull List<Menu> allMenus){
 
         // 子菜单(二级菜单)List
-        List<Menu> subMenus = new ArrayList<>();
+        List<Menu> subMenus = new ArrayList<Menu>();
         // 循环遍历菜单
         for (Menu menu:allMenus) {
             // 判断 如果遍历出来的菜单的parentId和menuId相同,说明遍历出来的menu是当前菜单的子菜单

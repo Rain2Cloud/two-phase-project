@@ -1,4 +1,4 @@
-package com.aaa.yay.Controller;
+package com.aaa.yay.controller;
 
 import com.aaa.yay.base.BaseService;
 import com.aaa.yay.base.CommonController;

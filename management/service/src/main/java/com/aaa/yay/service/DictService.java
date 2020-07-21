@@ -4,6 +4,7 @@ import com.aaa.yay.base.BaseService;
 import com.aaa.yay.base.ResultData;
 import com.aaa.yay.mapper.DictMapper;
 import com.aaa.yay.model.Dict;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -20,6 +21,7 @@ import static com.aaa.yay.status.OperationStatus.*;
  * @Version 1.0
  */
 @Service
+@Slf4j
 public class DictService extends BaseService<Dict> {
 
          @Autowired

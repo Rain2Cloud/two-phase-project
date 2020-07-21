@@ -32,7 +32,8 @@ public enum OperationStatus {
     SELECT_DATA_FAILED("23", "查询数据失败"),
     SELECT_DATA_NOT_EXIST("24","数据不存在！"),
     SELECT_DATA_BY_ID_SUCCESS("25","根据ID查询数据成功！"),
-    SELECT_DATA_BY_ID_FAILED("26","根据ID查询数据失败！");
+    SELECT_DATA_BY_ID_FAILED("26","根据ID查询数据失败！"),
+    LOGIN_TIMEOUT_EXIT("10006","超时自动退出，请重新登录");
     
     /**
     * 

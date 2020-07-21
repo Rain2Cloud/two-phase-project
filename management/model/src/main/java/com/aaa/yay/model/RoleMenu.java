@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * @author 十八
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

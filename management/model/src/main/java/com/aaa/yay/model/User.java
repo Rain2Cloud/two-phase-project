@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @author 十八
+ */
 @Table(name = "t_user")
 @Data
 @NoArgsConstructor

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.aaa.yay.status.OperationStatus.*;
 
@@ -88,4 +90,27 @@ public class DeptService extends BaseService<Dept> {
         }
 
 
+        /**
+        * @Auther: czb
+        * @Description:
+         * 根据条件查询部门信息
+        * @Date: 2020/7/18 15:29
+        * @param [hashMap]
+        * @return java.util.Map<java.lang.String,java.lang.Object>
+        */
+    public Map<String,Object> selectAllDept(HashMap hashMap){
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        //根据条件查询部门
+        List<Dept> depts = deptMapper.selectDeptByNameOrTime(hashMap);
+        //判断查询出来的信息是否为空
+        if(depts.size()>0 && depts !=null){
+            resultMap.put("code",SELECT_DATA_SUCCESS.getCode());
+            resultMap.put("msg",SELECT_DATA_SUCCESS.getMsg());
+            resultMap.put("data",depts);
+        }else{
+            resultMap.put("code", SELECT_DATA_FAILED.getCode());
+            resultMap.put("msg", SELECT_DATA_FAILED.getMsg());
+        }
+        return resultMap;
+    }
 }

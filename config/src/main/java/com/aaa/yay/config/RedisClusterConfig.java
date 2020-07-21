@@ -25,7 +25,7 @@ public class RedisClusterConfig {
     public JedisCluster getJedisCluster(){
         String nodes = redisClusterProperties.getNodes();
         String[] split = nodes.split(",");
-        Set<HostAndPort> hostAndPortSet = new HashSet<>();
+        Set<HostAndPort> hostAndPortSet = new HashSet<HostAndPort>();
         for (String hostPort : split){
             // 0:ip 1:port
             String[] split1 = hostPort.split(":");

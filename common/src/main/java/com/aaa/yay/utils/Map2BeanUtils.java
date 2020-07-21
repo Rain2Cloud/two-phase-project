@@ -27,7 +27,7 @@ public class Map2BeanUtils {
      * 高性能反射工具类中，高性能反射字节集
      * ConcurrentHashMap:在线程中运转，这个Map会在当前线程中出现，而且线程和线程具有隔离性，这里的Map就不会被其他的线程所干扰
      */
-    private final static ConcurrentHashMap<Class, MethodAccess> CONCURRENT_HASH_MAP = new ConcurrentHashMap<>(16);
+    private final static ConcurrentHashMap<Class, MethodAccess> CONCURRENT_HASH_MAP = new ConcurrentHashMap<Class, MethodAccess>(16);
 
 
     public static <T> T map2Bean(Map<String, Object> map, Class<T> clazz) {
