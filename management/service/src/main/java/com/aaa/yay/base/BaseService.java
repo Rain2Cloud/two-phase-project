@@ -45,7 +45,6 @@ public abstract class BaseService<T> {
     @Autowired
     private UserMapper userMapper;
 
-
     protected Mapper<T> getMapper() {
         return mapper;
     }
