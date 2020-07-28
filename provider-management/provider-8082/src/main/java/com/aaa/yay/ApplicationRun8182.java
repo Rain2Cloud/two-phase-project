@@ -13,8 +13,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.aaa.yay.mapper")
-public class ApplicationRun8082 {
+public class ApplicationRun8182 {
     public static void main(String[] args){
-        SpringApplication.run(ApplicationRun8082.class,args);
+        SpringApplication.run(ApplicationRun8182.class,args);
     }
 }

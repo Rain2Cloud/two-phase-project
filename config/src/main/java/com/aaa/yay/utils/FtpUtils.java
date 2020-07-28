@@ -1,17 +1,20 @@
 package com.aaa.yay.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.SocketException;
 
 /**
  * @Author yay
  * @Description Ftp上传工具类
  * @CreatTime 2020年 07月13日 星期一 21:07:33
  */
+@Slf4j
 public class FtpUtils {
 
     private FtpUtils(){
@@ -120,4 +123,162 @@ public class FtpUtils {
         }
         return true;
     }
+
+    /**
+    * @Auther: czb
+    * @Description:
+     * 登录FTP服务器
+     * @Date: 2020/7/24 19:56
+    * @param [host, port, username, password]
+    * @return org.apache.commons.net.ftp.FTPClient
+    */
+
+    public static FTPClient getFtpClient(String host, int port, String username, String password){
+        //创建FTPClient对象,这是ftp给java提供的api
+        FTPClient ftpClient = new FTPClient();
+        try {
+            // 连接FTP服务器，如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
+            ftpClient.connect(host,port);
+            // 登录FTP服务器
+            ftpClient.login(username,password);
+            // 如果登录成功，返回码是230。如果失败，则返回530/503
+            int replyCode = ftpClient.getReplyCode();
+            // 判断返回码是否合法，如果不合法说明账号和密码错误
+            if (!FTPReply.isPositiveCompletion(replyCode)){
+                log.info("未连接到FTP，用户名或密码错误。");
+                //如果连接失败，释放资源
+                ftpClient.disconnect();
+                return null;
+            }else {
+                log.info("FTP连接成功。");
+                return ftpClient;
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+            log.info("FTP的IP地址可能错误，请正确配置。");
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.info("FTP的端口错误,请正确配置。");
+        }
+        return ftpClient;
+    }
+
+
+
+    /**
+    * @Auther: czb
+    * @Description:
+     * 下载文件
+    * @Date: 2020/7/24 19:57
+    * @param [host, port, username, password, ftpPath, localPath, fileName]
+    * @return java.io.File
+    */
+    public static File downloadFtpFile(String host, int port, String username, String password, String ftpPath,
+                                       String localPath, String fileName){
+        FTPClient ftpClient = null;
+        try {
+            //获取连接
+            ftpClient = getFtpClient(host, port, username, password);
+            //设置中文支持
+            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.changeWorkingDirectory(ftpPath);
+            //判断目录下是否存在文件，如果不存在则创建文件
+            File localFile  = new File(localPath, fileName);
+            if (!localFile.getParentFile().exists()){
+                localFile.getParentFile().mkdirs();
+            }
+            //创建文件
+            OutputStream outputStream = new FileOutputStream(localFile);
+            //下载文件
+            ftpClient.retrieveFile(fileName, outputStream);
+            outputStream.close();
+            ftpClient.logout();
+            return localFile;
+        } catch (FileNotFoundException e) {
+            log.error("没有找到" + ftpPath + "文件，" + e);
+        } catch (SocketException e) {
+            log.error("连接FTP失败， " + e);
+        } catch (IOException e) {
+            log.error("文件读取错误。" + e);
+        } finally {
+            if (ftpClient != null && ftpClient.isConnected()){
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+    * @Auther: czb
+    * @Description:
+     * 检验指定路径的文件是否存在ftp服务器中
+     * filePath--指定绝对路径的文件
+    * @Date: 2020/7/24 19:57
+    * @param [hostname, port, username, password, filePath]
+    * @return boolean
+    */
+
+    public static boolean isFTPFileExist(final String hostname, final int port, final String username,
+                                         final String password, final String filePath) {
+        log.info("判断文件在ftp上是否存在！");
+        boolean exists = false;
+        final FTPClient ftpClient = getFtpClient(hostname, port, username, password);
+        try {
+            final FTPFile[] files = ftpClient.listFiles(new String(filePath.getBytes("UTF-8"), "ISO-8859-1"));
+            if (files != null && files.length > 0) {
+                exists = true;
+            }
+        } catch (final IOException e) {
+            log.error("failed to judge whether the file (" + filePath + ") is existed");
+        }
+        log.info("文件" + filePath + "在ftp上是否存在?" + exists);
+        return exists;
+    }
+
+
+    /**
+    * @Auther: czb
+    * @Description:
+     * 删除ftp的文件
+    * @Date: 2020/7/24 19:57
+    * @param [hostname, port, username, password, ftpPath]
+    * @return boolean
+    */
+
+    public static boolean deleteFile (final String hostname, final int port, final String username,
+                                      final String password, final String ftpPath) {
+        if (ftpPath != null && ftpPath != "") {
+            final FTPClient ftpClient = getFtpClient(hostname, port, username, password);
+            if (ftpPath.endsWith("/")) {
+                log.info("错误的文件路径");
+                return false;
+            }
+            try {
+                final boolean exists = isFTPFileExist(hostname, port, username, password, ftpPath);
+                if (exists) {
+                    ftpClient.deleteFile(new String(ftpPath.getBytes("GBK"), "iso-8859-1"));
+                } else {
+                    log.info("文件" + ftpPath + "已经不存在");
+                    return true;
+                }
+            } catch (IOException e) {
+                log.error("FTP上文件删除失败！", e);
+                return false;
+            }
+        } else {
+            log.info("没有需要删除的文件！");
+        }
+        return true;
+    }
+
+
+
+
+
 }

@@ -33,8 +33,8 @@ public class MappingProjectService extends BaseService<MappingProject>{
     * @param [mappingProject]
     * @return java.util.Map<java.lang.String,java.lang.Object>
     */
-        public Map<String,Object> projectSelect(MappingProject mappingProject){
-            HashMap<String,Object> resultMap = new HashMap<String, Object>();
+        public ResultData projectSelect(MappingProject mappingProject){
+           ResultData resultData = new ResultData();
             List<HashMap> restData = new ArrayList<HashMap>();
             if (null == mappingProject){
                 restData = mappingProjectMapper.SelectAllProject();
@@ -42,15 +42,15 @@ public class MappingProjectService extends BaseService<MappingProject>{
                 restData = mappingProjectMapper.projectSelect(mappingProject);
             }
             if (restData.size() > 0){
-                resultMap.put("code",SELECT_DATA_SUCCESS.getCode());
-                resultMap.put("msg",SELECT_DATA_SUCCESS.getMsg());
-                resultMap.put("data",restData);
+                resultData.setCode(SELECT_DATA_SUCCESS.getCode()).setMsg(SELECT_DATA_SUCCESS.getMsg());
+               resultData.setData(restData);
+
             }else {
-                resultMap.put("code",SELECT_DATA_FAILED.getCode());
-                resultMap.put("msg",SELECT_DATA_FAILED.getMsg());
+              resultData.setCode(SELECT_DATA_FAILED.getCode()).setMsg(SELECT_DATA_FAILED.getMsg());
+
 
             }
-            return  resultMap;
+            return resultData;
 
         }
 
@@ -211,10 +211,4 @@ public class MappingProjectService extends BaseService<MappingProject>{
             return resultData.setCode(ADD_FAILED.getCode()).setMsg(ADD_FAILED.getMsg());
 
         }
-
-
-
-
-
-
 }

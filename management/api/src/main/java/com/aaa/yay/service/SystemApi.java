@@ -165,7 +165,8 @@ public interface SystemApi {
         * @return com.aaa.yay.base.ResultData
         */
     @PostMapping("/user/selectUserAll")
-    ResultData selectUserAll(@RequestBody HashMap map);
+    ResultData
+    selectUserAll(@RequestBody HashMap map);
 
 
 //   Dict(字典信息管理)
@@ -314,5 +315,16 @@ public interface SystemApi {
      */
     @DeleteMapping("dept/delDept")
     ResultData delDept(@RequestBody List<Long> ids);
+
+
+    /**
+    * @Auther: czb
+    * @Description:
+     * 批量删除信息
+    * @Date: 2020/7/25 14:52
+    * @param [ids]
+    * @return com.aaa.yay.base.ResultData
+    */
+    ResultData delNews(@RequestBody List<Long> ids );
 }
 

@@ -83,23 +83,23 @@ public class UserService extends BaseService<User> {
         return resultData.setCode(UPDATE_FAILED.getCode()).setMsg(UPDATE_FAILED.getMsg());
     }
 
-//        /**
-//        * @Auther: czb
-//        * @Description:
-//         *查询全部用户
-//        * @Date: 2020/7/16 18:15
-//        * @param []
-//        * @return java.util.Map<java.lang.String,java.lang.Object>
-//        */
-//    public ResultData selectAll(User user){
-//       ResultData resultData = new ResultData();
-//        List<User> users = userMapper.selectAll();
-//        if (null != users && !users.isEmpty()){
-//        return  resultData.setCode(SELECT_DATA_SUCCESS.getCode()).setMsg(SELECT_DATA_SUCCESS.getMsg()).setData(users);
-//             }
-//                return resultData.setCode(SELECT_DATA_FAILED.getCode()).setMsg(SELECT_DATA_FAILED.getMsg());
-//
-//    }
+        /**
+        * @Auther: czb
+        * @Description:
+         *查询全部用户
+        * @Date: 2020/7/16 18:15
+        * @param []
+        * @return java.util.Map<java.lang.String,java.lang.Object>
+        */
+    public ResultData selectAll(User user){
+       ResultData resultData = new ResultData();
+        List<User> users = userMapper.selectAll();
+        if (null != users && !users.isEmpty()){
+        return  resultData.setCode(SELECT_DATA_SUCCESS.getCode()).setMsg(SELECT_DATA_SUCCESS.getMsg()).setData(users);
+             }
+                return resultData.setCode(SELECT_DATA_FAILED.getCode()).setMsg(SELECT_DATA_FAILED.getMsg());
+
+    }
 
         /**
         * @Auther: czb
@@ -123,10 +123,10 @@ public class UserService extends BaseService<User> {
                     resultMap.put("msg", SELECT_DATA_FAILED.getMsg());
                 }
             }
-
             return resultMap;
-
         }
+
+
 
 
 }

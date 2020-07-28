@@ -5,11 +5,15 @@ import com.aaa.yay.base.CommonController;
 import com.aaa.yay.base.ResultData;
 import com.aaa.yay.model.User;
 import com.aaa.yay.service.UserService;
+import com.aaa.yay.utils.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,14 +73,14 @@ public class UserController extends CommonController<User> {
            return userService.updateUser(user);
         }
 
-//        /**
-//        * @Auther: yay
-//        * @Description:
-//         *Excle导出用户信息
-//        * @Date: 2020/7/16 22:36
-//        * @param [response]
-//        * @return void
-//        */
+//    /**
+//     * @Auther: yay
+//     * @Description:
+//     *Excle导出用户信息
+//     * @Date: 2020/7/16 22:36
+//     * @param [response]
+//     * @return void
+//     */
 //    @GetMapping("/exportExcle")
 //    public void exportExcle(HttpServletResponse response){
 //        Map<String, Object> map = userService.selectAll();
@@ -136,8 +140,8 @@ public class UserController extends CommonController<User> {
 //                        }
 //                        //把数据放入excelData
 //                        excelData.add(list);
-//                    }1
-
+//                    }
+//
 //                }
 //                String sheetName = "用户信息";
 //                String fileName = "用户信息表";
@@ -155,37 +159,37 @@ public class UserController extends CommonController<User> {
 
 
 
-//    /**
-//    * @Auther: czb
-//    * @Description:
-//     *
-//    * @Date: 2020/7/17 9:34
-//    * @param []
-//    * @return com.aaa.yay.base.ResultData
-//    */
-//    @PostMapping("/selectAll")
-//    public ResultData selectAll(User user){
-//        ResultData resultData = userService.selectAll(user);
-//        return resultData;
-//    }
+    /**
+    * @Auther: czb
+    * @Description:
+     *
+    * @Date: 2020/7/17 9:34
+    * @param []
+    * @return com.aaa.yay.base.ResultData
+    */
+    @PostMapping("/selectAll")
+    public ResultData selectAll(User user){
+        ResultData resultData = userService.selectAll(user);
+        return resultData;
+    }
 
-//
-//            /**
-//            * @Auther: czb
-//            * @Description:
-//             * 带条件的查询全部用户（分页）
-//            * @Date: 2020/7/17 10:45
-//            * @param [pageNo, pageSize]
-//            * @return com.aaa.yay.base.ResultData
-//            */
-//            @PostMapping("/selectAllUserPage")
-//            public ResultData selectAllUserPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-//             List<User> userList =  getBaseService().selectByFileds(pageNo,pageSize,null, null, null, (String[]) null);
-//                if (userList.size()>0){
-//                    return super.operationSuccess(userList,"查询成功");
-//                }
-//             return super.operationFailed("查询失败");
-//            }
+
+            /**
+            * @Auther: czb
+            * @Description:
+             * 带条件的查询全部用户（分页）
+            * @Date: 2020/7/17 10:45
+            * @param [pageNo, pageSize]
+            * @return com.aaa.yay.base.ResultData
+            */
+            @PostMapping("/selectAllUserPage")
+            public ResultData selectAllUserPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+             List<User> userList =  getBaseService().selectByFileds(pageNo,pageSize,null, null, null, (String[]) null);
+                if (userList.size()>0){
+                    return super.operationSuccess(userList,"查询成功");
+                }
+             return super.operationFailed("查询失败");
+            }
 
 
     /**
@@ -196,7 +200,7 @@ public class UserController extends CommonController<User> {
     * @return com.aaa.yay.base.ResultData
     */
      @PostMapping("/selectUserAll")
-     public ResultData selectUserAll(@RequestBody HashMap map){
+     public ResultData selectUserAll(HashMap map){
         Map<String, Object> userAll = userService.selectUserAll(map);
         if (SELECT_DATA_SUCCESS.getCode().equals(userAll.get("code"))){
             return super.selectSuccess(userAll);
@@ -206,6 +210,7 @@ public class UserController extends CommonController<User> {
             return super.selectFailed(SELECT_DATA_NOT_EXIST.getMsg());
         }
     }
+
 
 
 

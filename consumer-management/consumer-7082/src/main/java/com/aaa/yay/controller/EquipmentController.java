@@ -33,5 +33,7 @@ public class EquipmentController extends BaseController {
     @PostMapping("/selectAllEquipment")
      public ResultData selectAllEquipment(@RequestParam("pageNo") Integer pageNo , @RequestParam("pageSize") Integer pageSize){
         return mappingApi.selectAllEquipment(pageNo,pageSize);
+
     }
+
 }

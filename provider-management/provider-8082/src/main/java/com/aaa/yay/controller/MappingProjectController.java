@@ -36,9 +36,9 @@ public class MappingProjectController extends CommonController<MappingProject> {
     */
     @PostMapping("/projectSelect")
     public ResultData projectSelect (@RequestBody MappingProject mappingProject){
-        Map<String,Object> resultMap =mappingProjectService.projectSelect(mappingProject);
-        if (SELECT_DATA_SUCCESS.getCode().equals(resultMap.get("code"))){
-            return super.selectSuccess(resultMap.get("data"));
+        ResultData resultMap =mappingProjectService.projectSelect(mappingProject);
+        if (SELECT_DATA_SUCCESS.getCode().equals(resultMap.getCode())){
+            return super.selectSuccess(resultMap.getData());
         }else{
             return super.selectFailed();
         }

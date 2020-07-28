@@ -1,5 +1,4 @@
 package com.aaa.yay.controller;
-
 import com.aaa.yay.base.BaseController;
 import com.aaa.yay.base.ResultData;
 import com.aaa.yay.service.MappingApi;
@@ -57,8 +56,5 @@ public class ResultCommitController extends BaseController {
         System.out.println(id);
         return mappingApi.resultDetail(id);
     }
-
-
-
 
 }
